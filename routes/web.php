@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 /** User Routes */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend.home.home');
 });
 
 Route::get('/dashboard', function () {

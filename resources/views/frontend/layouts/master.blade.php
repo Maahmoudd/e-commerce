@@ -5,10 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi" />
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
           rel="stylesheet">
-    <title>Sazao || e-Commerce HTML Template</title>
-    <link rel="icon" type="image/png" href="{{asset('frontend/images/favicon.png')}}">
+    <title>
+        @yield('title')
+    </title>
+{{--    <link rel="icon" type="image/png" href="{{asset($logoSetting->favicon)}}">--}}
     <link rel="stylesheet" href="{{asset('frontend/css/all.min.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/select2.min.css')}}">
@@ -22,10 +25,14 @@
     <link rel="stylesheet" href="{{asset('frontend/css/ranger_style.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/jquery.classycountdown.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/venobox.min.css')}}">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
-    <!-- <link rel="stylesheet" href="css/rtl.css"> -->
+{{--    @if($settings->layout === 'RTL')--}}
+{{--        <link rel="stylesheet" href="{{asset('frontend/css/rtl.css')}}">--}}
+{{--    @endif--}}
+{{--    @vite(['resources/js/app.js'])--}}
 </head>
 
 <body>
@@ -33,70 +40,47 @@
 <!--============================
     HEADER START
 ==============================-->
-    @include('frontend.layouts.header')
+@include('frontend.layouts.header')
 <!--============================
-    HEADER END
-==============================-->
+        HEADER END
+    ==============================-->
 
 
 <!--============================
     MAIN MENU START
 ==============================-->
-    @include('frontend.layouts.menu')
+@include('frontend.layouts.menu')
 <!--============================
-    MAIN MENU END
+        MAIN MENU END
+    ==============================-->
+
+
+<!--============================
+    Main Content Start
 ==============================-->
+@yield('content')
+<!--============================
+       Main Content End
+    ==============================-->
 
 
+<section class="product_popup_modal">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content product-modal-content">
 
-<!--==========================
-    POP UP START
-===========================-->
-<!-- <section id="wsus__pop_up">
-    <div class="wsus__pop_up_center">
-        <div class="wsus__pop_up_text">
-            <span id="cross"><i class="fas fa-times"></i></span>
-            <h5>get up to <span>75% off</span></h5>
-            <h2>Sign up to E-SHOP</h2>
-            <p>Subscribe to the <b>E-SHOP</b> market newsletter to receive updates on special offers.</p>
-            <form>
-                <input type="email" placeholder="Your Email" class="news_input">
-                <button type="submit" class="common_btn">go</button>
-                <div class="wsus__pop_up_check_box">
-                </div>
-            </form>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault11">
-                <label class="form-check-label" for="flexCheckDefault11">
-                    Don't show this popup again
-                </label>
             </div>
         </div>
     </div>
-</section> -->
-<!--==========================
-    POP UP END
-===========================-->
-
-
-
-    <!--============================
-        MAIN CONTENT START
-    ==============================-->
-        @yield('content')
-    <!--============================
-        MAIN CONTENT END
-    ==============================-->
-
-
+</section>
 
 <!--============================
     FOOTER PART START
 ==============================-->
-    @include('frontend.layouts.footer')
+@include('frontend.layouts.footer')
 <!--============================
-    FOOTER PART END
-==============================-->
+        FOOTER PART END
+    ==============================-->
 
 
 <!--============================
@@ -142,11 +126,31 @@
 <script src="{{asset('frontend/js/isotope.pkgd.min.js')}}"></script>
 <!--venobox js-->
 <script src="{{asset('frontend/js/venobox.min.js')}}"></script>
+<!--Toaster js-->
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<!--Sweetalert js-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!--classycountdown js-->
 <script src="{{asset('frontend/js/jquery.classycountdown.js')}}"></script>
 
+
 <!--main/custom js-->
 <script src="{{asset('frontend/js/main.js')}}"></script>
+
+<script>
+    @if ($errors->any())
+    @foreach ($errors->all() as $error)
+    toastr.error("{{$error}}")
+    @endforeach
+    @endif
+</script>
+<script>
+    $(document).ready(function(){
+        $('.auto_click').click();
+    })
+</script>
+{{--@include('frontend.layouts.scripts')--}}
+{{--@stack('scripts')--}}
 </body>
 
 </html>

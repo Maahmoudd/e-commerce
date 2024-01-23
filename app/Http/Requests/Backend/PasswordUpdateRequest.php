@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\Backend;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class ProfileUpdateRequest extends FormRequest
+class PasswordUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +22,9 @@ class ProfileUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'max:100'],
-            'email' => ['required', 'email', 'unique:users,email,'.Auth::user()->id],
-            'image' => ['image', 'max:2048']
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required', 'confirmed', 'min:8']
         ];
     }
+
 }

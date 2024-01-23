@@ -16,7 +16,7 @@
                             <div class="wsus__dash_pro_area">
                                 <h4>basic information</h4>
 
-                                <form action="" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('user.profile.update') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <div class="col-md-12">
@@ -42,7 +42,7 @@
 
                                     </div>
                                     <div class="col-xl-12">
-                                        <button class="common_btn mb-4 mt-2" type="submit">upload</button>
+                                        <button class="common_btn mb-4 mt-2" type="submit">Update</button>
                                     </div>
                                 </form>
 

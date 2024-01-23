@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\PasswordUpdateRequest;
-use App\Http\Requests\Admin\ProfileUpdateRequest;
+use App\Http\Requests\Backend\PasswordUpdateRequest;
+use App\Http\Requests\Backend\ProfileUpdateRequest;
 use App\Http\Services\Backend\ProfileService;
 
 class ProfileController extends Controller

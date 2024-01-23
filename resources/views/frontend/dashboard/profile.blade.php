@@ -48,8 +48,9 @@
 
 
                                 <div class="wsus__dash_pass_change mt-2">
-                                    <form action="" method="POST">
+                                    <form action="{{ route('user.profile.update.password') }}" method="POST">
                                         @csrf
+                                        @method('PUT')
                                         <div class="row">
                                             <h4>Update Password</h4>
                                             <div class="col-xl-4 col-md-6">
@@ -71,7 +72,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-xl-12">
-                                                <button class="common_btn" type="submit">upload</button>
+                                                <button class="common_btn" type="submit">Update</button>
                                             </div>
                                         </div>
                                     </form>

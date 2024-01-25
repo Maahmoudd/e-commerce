@@ -2,15 +2,14 @@
 
 use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\UserDashboardController;
 use App\Http\Controllers\Frontend\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
 /** Frontend Routes */
 
-Route::get('/', function () {
-    return view('frontend.home.home');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

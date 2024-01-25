@@ -3,12 +3,24 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Services\Frontend\HomeService;
+
 
 class HomeController extends Controller
 {
+
+    protected $homeService;
+
+    public function __construct(HomeService $homeService)
+    {
+        $this->homeService = $homeService;
+    }
+
+
     public function index()
     {
-        return view('frontend.home.home');
+        $sliders = $this->homeService->index();
+        return view('frontend.home.home',
+            compact('sliders'));
     }
 }

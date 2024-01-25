@@ -22,7 +22,7 @@ class CreateSliderRequest extends FormRequest
     public function rules(): array
     {
         return [
-//            'banner' => ['required', 'image', 'max:2000'],
+            'banner' => ['required', 'image', 'max:2000'],
             'type' => ['string', 'max:200'],
             'title' => ['required', 'max:200'],
             'starting_price' => ['max:200'],

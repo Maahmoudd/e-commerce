@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\DataTables\SliderDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\CreateSliderRequest;
 use App\Http\Services\Backend\SliderService;
@@ -17,9 +18,9 @@ class SliderController extends Controller
         $this->sliderService = $sliderService;
     }
 
-    public function index()
+    public function index(SliderDataTable $dataTable)
     {
-        return view('admin.slider.index');
+        return $dataTable->render('admin.slider.index');
     }
 
     public function create()

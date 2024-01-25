@@ -14,7 +14,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Create Slider</h4>
+                            <h4>Edit Slider</h4>
                         </div>
                         <div class="card-body">
                             <form action="{{route('admin.slider.store')}}" method="POST" enctype="multipart/form-data">

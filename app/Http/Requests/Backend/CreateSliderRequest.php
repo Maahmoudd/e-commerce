@@ -21,8 +21,7 @@ class CreateSliderRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'banner' => ['required', 'image', 'max:2000'],
+        $rules = [
             'type' => ['string', 'max:200'],
             'title' => ['required', 'max:200'],
             'starting_price' => ['max:200'],
@@ -30,5 +29,15 @@ class CreateSliderRequest extends FormRequest
             'serial' => ['required'],
             'status' => ['required']
         ];
+
+        // Check if it's a creation request
+        if ($this->isMethod('post')) {
+            $rules['banner'] = ['required', 'image', 'max:2000'];
+        } elseif ($this->isMethod('put')) {
+            // If it's an update request, make 'banner' field 'nullable'
+            $rules['banner'] = ['nullable', 'image', 'max:2000'];
+        }
+
+        return $rules;
     }
 }

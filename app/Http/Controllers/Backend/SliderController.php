@@ -7,8 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\CreateSliderRequest;
 use App\Http\Services\Backend\SliderService;
 use App\Models\Slider;
-use Illuminate\Http\Request;
-use function Symfony\Component\String\s;
 
 class SliderController extends Controller
 {
@@ -42,12 +40,15 @@ class SliderController extends Controller
 
     public function edit(string $id)
     {
-        //
+        $slider = Slider::findOrFail($id);
+        return view('admin.slider.edit', compact('slider'));
     }
 
-    public function update(Request $request, string $id)
+    public function update(CreateSliderRequest $request, string $id)
     {
-        //
+        $this->sliderService->updateSlider($request, $id);
+        toastr('Slider Has Been Updated!');
+        return redirect()->route('admin.slider.index');
     }
 
     public function destroy(string $id)

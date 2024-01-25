@@ -24,4 +24,11 @@ class SliderService
         $slider->save();
     }
 
+    public function deleteSlider($id)
+    {
+        $slider = Slider::findOrFail($id);
+        $this->deleteImage($slider->banner);
+        $slider->delete();
+    }
+
 }

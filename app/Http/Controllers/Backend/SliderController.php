@@ -35,7 +35,7 @@ class SliderController extends Controller
 
     public function show(string $id)
     {
-        //
+
     }
 
     public function edit(string $id)
@@ -53,6 +53,7 @@ class SliderController extends Controller
 
     public function destroy(string $id)
     {
-        //
+        $this->sliderService->deleteSlider($id);
+        return response(['status' => 'success', 'message' => 'Deleted Successfully']);
     }
 }

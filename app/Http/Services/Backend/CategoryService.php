@@ -26,4 +26,11 @@ class CategoryService
         $category->delete();
     }
 
+    public function changeStatus($request)
+    {
+        $category = Category::findOrFail($request->id);
+        $category->status = $request->status == 'true' ? 1 : 0;
+        $category->save();
+    }
+
 }

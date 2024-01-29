@@ -58,4 +58,10 @@ class CategoryController extends Controller
         toastr('Category Deleted!');
         return back();
     }
+
+    public function changeStatus(Request $request)
+    {
+        $this->categoryService->changeStatus($request);
+        return response(['message' => 'Status has been updated!']);
+    }
 }

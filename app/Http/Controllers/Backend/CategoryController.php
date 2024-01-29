@@ -54,6 +54,8 @@ class CategoryController extends Controller
 
     public function destroy(string $id)
     {
-        //
+        $this->categoryService->deleteCategory($id);
+        toastr('Category Deleted!');
+        return back();
     }
 }

@@ -13,4 +13,11 @@ class CategoryService
         Category::create($request);
     }
 
+    public function updateCategory($request, $id)
+    {
+        $category = Category::findOrFail($id);
+        $request['slug'] = Str::slug($request['name']);
+        $category->update($request);
+    }
+
 }

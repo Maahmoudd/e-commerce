@@ -21,10 +21,21 @@ class CreateCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'icon' => ['required', 'not_in:empty'],
-            'name' => ['required', 'max:200', 'unique:categories,name'],
-            'status' => ['required']
+            'name' => ['required', 'max:200'],
+            'status' => ['required'],
         ];
+
+        // Check if updating (editing) an existing category
+        if ($this->isMethod('patch') || $this->isMethod('put')) {
+            $categoryId = $this->route('category'); // Assuming 'category' is the route parameter name
+            $rules['name'][] = 'unique:categories,name,' . $categoryId;
+        } else {
+            // If creating a new category, apply 'unique' rule without the current ID
+            $rules['name'][] = 'unique:categories,name';
+        }
+
+        return $rules;
     }
 }

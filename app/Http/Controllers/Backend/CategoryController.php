@@ -6,6 +6,7 @@ use App\DataTables\CategoryDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\CreateCategoryRequest;
 use App\Http\Services\Backend\CategoryService;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -40,12 +41,15 @@ class CategoryController extends Controller
 
     public function edit(string $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('admin.category.edit', compact('category'));
     }
 
-    public function update(Request $request, string $id)
+    public function update(CreateCategoryRequest $request, string $id)
     {
-        //
+        $this->categoryService->updateCategory($request->validated(), $id);
+        toastr('Category Updated!');
+        return redirect()->route('admin.category.index');
     }
 
     public function destroy(string $id)

@@ -30,7 +30,7 @@ class CategoryController extends Controller
 
     public function store(CreateCategoryRequest $request)
     {
-        $this->categoryService->createCategory($request->validated(), Category::class);
+        $this->categoryService->create($request->validated(), Category::class);
         toastr('Created Successfully!');
         return redirect()->route('admin.category.index');
     }
@@ -48,14 +48,14 @@ class CategoryController extends Controller
 
     public function update(CreateCategoryRequest $request, string $id)
     {
-        $this->categoryService->updateCategory($request->validated(), $id, Category::class);
+        $this->categoryService->update($request->validated(), $id, Category::class);
         toastr('Category Updated!');
         return redirect()->route('admin.category.index');
     }
 
     public function destroy(string $id)
     {
-        $response = $this->categoryService->deleteCategory($id,
+        $response = $this->categoryService->destroy($id,
             Category::class,
             SubCategory::class,
             'category_id');

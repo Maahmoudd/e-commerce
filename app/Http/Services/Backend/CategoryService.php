@@ -7,20 +7,20 @@ use Illuminate\Support\Str;
 
 class CategoryService
 {
-    public function createCategory($request, $object)
+    public function create($request, $object)
     {
         $request['slug'] = Str::slug($request['name']);
         $object::create($request);
     }
 
-    public function updateCategory($request, $id, $object)
+    public function update($request, $id, $object)
     {
         $category = $object::findOrFail($id);
         $request['slug'] = Str::slug($request['name']);
         $category->update($request);
     }
 
-    public function deleteCategory($id, $object, $innerObject, $objectField)
+    public function destroy($id, $object, $innerObject, $objectField)
     {
         $object = $object::findOrFail($id);
         $innerObject = $innerObject::where($objectField, $object->id)->count();

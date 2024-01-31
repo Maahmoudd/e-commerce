@@ -20,10 +20,17 @@ class CategoryService
         $category->update($request);
     }
 
-    public function deleteCategory($id, $object)
+    public function deleteCategory($id, $object, $innerObject, $objectField)
     {
-        $category = $object::findOrFail($id);
-        $category->delete();
+        $object = $object::findOrFail($id);
+        $innerObject = $innerObject::where($objectField, $object->id)->count();
+
+        if($innerObject > 0){
+            return ['status' => 'error', 'message' => 'This items contain, sub items for delete this you have to delete the sub items first!'];
+        }
+        $object->delete();
+
+        return ['status' => 'success', 'Deleted Successfully!'];
     }
 
     public function changeStatus($request, $object)

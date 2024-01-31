@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\CreateSubCategoryRequest;
 use App\Http\Services\Backend\CategoryService;
 use App\Models\Category;
+use App\Models\ChildCategory;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
@@ -58,9 +59,11 @@ class SubCategoryController extends Controller
 
     public function destroy(string $id)
     {
-        $this->categoryService->deleteCategory($id, SubCategory::class);
-        toastr('Sub Category Deleted!');
-        return back();
+        $response = $this->categoryService->deleteCategory($id,
+            SubCategory::class,
+            ChildCategory::class,
+            'sub_category_id');
+        return response($response);
     }
 
     public function changeStatus(Request $request)

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\CreateCategoryRequest;
 use App\Http\Services\Backend\CategoryService;
 use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -54,9 +55,11 @@ class CategoryController extends Controller
 
     public function destroy(string $id)
     {
-        $this->categoryService->deleteCategory($id, Category::class);
-        toastr('Category Deleted!');
-        return back();
+        $response = $this->categoryService->deleteCategory($id,
+            Category::class,
+            SubCategory::class,
+            'category_id');
+        return response($response);
     }
 
     public function changeStatus(Request $request, )

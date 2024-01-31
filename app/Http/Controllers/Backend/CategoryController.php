@@ -29,7 +29,7 @@ class CategoryController extends Controller
 
     public function store(CreateCategoryRequest $request)
     {
-        $this->categoryService->createCategory($request->validated());
+        $this->categoryService->createCategory($request->validated(), Category::class);
         toastr('Created Successfully!');
         return redirect()->route('admin.category.index');
     }
@@ -47,21 +47,21 @@ class CategoryController extends Controller
 
     public function update(CreateCategoryRequest $request, string $id)
     {
-        $this->categoryService->updateCategory($request->validated(), $id);
+        $this->categoryService->updateCategory($request->validated(), $id, Category::class);
         toastr('Category Updated!');
         return redirect()->route('admin.category.index');
     }
 
     public function destroy(string $id)
     {
-        $this->categoryService->deleteCategory($id);
+        $this->categoryService->deleteCategory($id, Category::class);
         toastr('Category Deleted!');
         return back();
     }
 
-    public function changeStatus(Request $request)
+    public function changeStatus(Request $request, )
     {
-        $this->categoryService->changeStatus($request);
+        $this->categoryService->changeStatus($request, Category::class);
         return response(['message' => 'Status has been updated!']);
     }
 }

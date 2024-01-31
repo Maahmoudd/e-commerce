@@ -4,20 +4,19 @@ namespace App\Http\Controllers\Backend;
 
 use App\DataTables\SubCategoryDataTable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\CreateCategoryRequest;
 use App\Http\Requests\Backend\CreateSubCategoryRequest;
-use App\Http\Services\Backend\SubCategoryService;
+use App\Http\Services\Backend\CategoryService;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
 class SubCategoryController extends Controller
 {
-    protected $subCategoryService;
+    protected $categoryService;
 
-    public function __construct(SubCategoryService $subCategoryService)
+    public function __construct(CategoryService $categoryService)
     {
-        $this->subCategoryService = $subCategoryService;
+        $this->categoryService = $categoryService;
     }
 
     public function index(SubCategoryDataTable $dataTable)
@@ -33,7 +32,7 @@ class SubCategoryController extends Controller
 
     public function store(CreateSubCategoryRequest $request)
     {
-        $this->subCategoryService->createSubCategory($request->validated());
+        $this->categoryService->createCategory($request->validated(), SubCategory::class);
         toastr('Created Successfully!');
         return redirect()->route('admin.sub-category.index');
     }
@@ -52,13 +51,21 @@ class SubCategoryController extends Controller
 
     public function update(CreateSubCategoryRequest $request, string $id)
     {
-        $this->subCategoryService->updateSubCategory($request->validated(), $id);
+        $this->categoryService->updateCategory($request->validated(), $id, SubCategory::class);
         toastr('Updated Successfully!');
         return redirect()->route('admin.sub-category.index');
     }
 
     public function destroy(string $id)
     {
-        //
+        $this->categoryService->deleteCategory($id, SubCategory::class);
+        toastr('Sub Category Deleted!');
+        return back();
+    }
+
+    public function changeStatus(Request $request)
+    {
+        $this->categoryService->changeStatus($request, SubCategory::class);
+        return response(['message' => 'Status has been updated!']);
     }
 }

@@ -7,28 +7,28 @@ use Illuminate\Support\Str;
 
 class CategoryService
 {
-    public function createCategory($request)
+    public function createCategory($request, $object)
     {
         $request['slug'] = Str::slug($request['name']);
-        Category::create($request);
+        $object::create($request);
     }
 
-    public function updateCategory($request, $id)
+    public function updateCategory($request, $id, $object)
     {
-        $category = Category::findOrFail($id);
+        $category = $object::findOrFail($id);
         $request['slug'] = Str::slug($request['name']);
         $category->update($request);
     }
 
-    public function deleteCategory($id)
+    public function deleteCategory($id, $object)
     {
-        $category = Category::findOrFail($id);
+        $category = $object::findOrFail($id);
         $category->delete();
     }
 
-    public function changeStatus($request)
+    public function changeStatus($request, $object)
     {
-        $category = Category::findOrFail($request->id);
+        $category = $object::findOrFail($request->id);
         $category->status = $request->status == 'true' ? 1 : 0;
         $category->save();
     }

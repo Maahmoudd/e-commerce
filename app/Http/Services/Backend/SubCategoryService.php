@@ -13,5 +13,12 @@ class SubCategoryService
         SubCategory::create($request);
     }
 
+    public function updateSubCategory($request, $id)
+    {
+        $subCategory = SubCategory::findOrFail($id);
+        $request['slug'] = Str::slug($request['name']);
+        $subCategory->update($request);
+    }
+
 
 }

@@ -19,12 +19,21 @@ class CreateSubCategoryRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+        public function rules(): array
     {
-        return [
+        $rules = [
             'category_id' => ['required'],
-            'name' => ['required', 'max:200', 'unique:sub_categories,name'],
-            'status' => ['required']
+            'name' => ['required', 'max:200'],
+            'status' => ['required'],
         ];
+
+        if ($this->isMethod('patch') || $this->isMethod('put')) {
+            $subCategoryId = $this->route('sub_category');
+            $rules['name'][] = 'unique:sub_categories,name,' . $subCategoryId;
+        } else {
+            $rules['name'][] = 'unique:sub_categories,name';
+        }
+
+        return $rules;
     }
 }

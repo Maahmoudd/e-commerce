@@ -4,7 +4,7 @@
       <!-- Main Content -->
         <section class="section">
           <div class="section-header">
-            <h1>Sub Category</h1>
+            <h1>Child Category</h1>
           </div>
 
           <div class="section-body">
@@ -13,7 +13,7 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Create Sub Category</h4>
+                    <h4>Create Child Category</h4>
 
                   </div>
                   <div class="card-body">
@@ -29,7 +29,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="inputState">Sub Category</label>
+                            <label for="inputState">Child Category</label>
                             <select id="inputState" class="form-control sub-category" name="sub_category_id">
                               <option value="">Select</option>
 

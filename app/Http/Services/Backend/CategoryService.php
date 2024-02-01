@@ -2,14 +2,20 @@
 
 namespace App\Http\Services\Backend;
 
-use App\Models\Category;
+use App\Traits\ImageUploadTrait;
 use Illuminate\Support\Str;
 
 class CategoryService
 {
+    use ImageUploadTrait;
     public function create($request, $object)
     {
-        $request['slug'] = Str::slug($request['name']);
+        $slug = Str::slug($request['name']);
+        $request['slug'] = $slug;
+
+        if (isset($request['logo']) && !empty($request['logo'])) {
+            $request['logo'] = $this->uploadImage($request, 'logo', 'uploads');
+        }
         $object::create($request);
     }
 

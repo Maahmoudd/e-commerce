@@ -18,20 +18,28 @@ class CreateProductRequest extends FormRequest
      */
     public function rules(): array
     {
+        $thumbImageRules = $this->isMethod('post') ? ['required', 'image', 'max:2000'] : ['sometimes', 'image', 'max:2000'];
+
         return [
-            'thumb_image' => ['required', 'image', 'max:3000'],
+            'thumb_image' => $thumbImageRules,
             'name' => ['required', 'max:200'],
             'category_id' => ['required'],
-            'sub_category_id' => ['required'],
-            'child_category_id' => ['required'],
+            'sub_category_id' => ['nullable'],
+            'child_category_id' => ['nullable'],
             'brand_id' => ['required'],
+            'sku' => ['nullable'],
             'price' => ['required'],
+            'offer_price' => ['nullable'],
+            'offer_start_date' => ['nullable'],
+            'offer_end_date' => ['nullable'],
             'qty' => ['required'],
+            'video_link' => ['nullable'],
             'short_description' => ['required', 'max: 600'],
             'long_description' => ['required'],
+            'product_type' => ['nullable'],
             'seo_title' => ['nullable','max:200'],
             'seo_description' => ['nullable','max:250'],
-            'status' => ['required']
+            'status' => ['required'],
         ];
     }
 }

@@ -57,12 +57,27 @@ class ProductsController extends Controller
 
     public function edit(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $subCategories = SubCategory::where('category_id', $product->category_id)->get();
+        $childCategories = ChildCategory::where('sub_category_id', $product->sub_category_id)->get();
+        $categories = Category::all();
+        $brands = Brand::all();
+        return view('admin.product.edit', compact('product', 'categories', 'brands', 'subCategories', 'childCategories'));
     }
 
-    public function update(Request $request, string $id)
+
+    public function update(CreateProductRequest $request, string $id)
     {
-        //
+        $validatedData = $request->validated();
+
+        $mergedData = array_merge($validatedData, [
+            'vendor_id' => Auth::user()->vendor->id,
+            'is_approved' => 1
+        ]);
+
+        $this->categoryService->update($mergedData,$id, Product::class,'thumb_image');
+        toastr('Updated Successfully!');
+        return redirect()->route('admin.products.index');
     }
     public function destroy(string $id)
     {

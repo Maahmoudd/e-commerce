@@ -27,7 +27,7 @@
                         </div>
                         <div class="form-group">
                             <label>Image</label>
-                            <input type="file" class="form-control" name="image">
+                            <input type="file" class="form-control" name="thumb_image">
                         </div>
 
                         <div class="form-group">
@@ -39,7 +39,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputState">Category</label>
-                                    <select id="inputState" class="form-control main-category" name="category">
+                                    <select id="inputState" class="form-control main-category" name="category_id">
                                       <option value="">Select</option>
                                       @foreach ($categories as $category)
                                         <option {{$category->id == $product->category_id ? 'selected' : ''}} value="{{$category->id}}">{{$category->name}}</option>
@@ -50,7 +50,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputState">Sub Category</label>
-                                    <select id="inputState" class="form-control sub-category" name="sub_category">
+                                    <select id="inputState" class="form-control sub-category" name="sub_category_id">
                                         <option value="">Select</option>
                                         @foreach ($subCategories as $subCategory)
                                             <option {{$subCategory->id == $product->sub_category_id ? 'selected' : ''}} value="{{$subCategory->id}}">{{$subCategory->name}}</option>
@@ -61,7 +61,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputState">Child Category</label>
-                                    <select id="inputState" class="form-control child-category" name="child_category">
+                                    <select id="inputState" class="form-control child-category" name="child_category_id">
                                         <option value="">Select</option>
                                         @foreach ($childCategories as $childCategory)
                                             <option {{$childCategory->id == $product->child_category_id ? 'selected' : ''}} value="{{$childCategory->id}}">{{$childCategory->name}}</option>
@@ -74,7 +74,7 @@
 
                         <div class="form-group">
                             <label for="inputState">Brand</label>
-                            <select id="inputState" class="form-control" name="brand">
+                            <select id="inputState" class="form-control" name="brand_id">
                                 <option value="">Select</option>
                                 @foreach ($brands as $brand)
                                     <option {{$brand->id == $product->brand_id ? 'selected' : ''}} value="{{$brand->id}}">{{$brand->name}}</option>
@@ -162,7 +162,7 @@
                               <option {{$product->status == 0 ? 'selected' : ''}} value="0">Inactive</option>
                             </select>
                         </div>
-                        <button type="submmit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                     </form>
                   </div>
 

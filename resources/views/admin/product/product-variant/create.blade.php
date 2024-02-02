@@ -25,7 +25,7 @@
                             <input type="text" class="form-control" name="name" value="">
                         </div>
                         <div class="form-group">
-                            <input type="hidden" class="form-control" name="product" value="{{request()->product}}">
+                            <input type="hidden" class="form-control" name="product_id" value="{{request()->product}}">
                         </div>
                         <div class="form-group">
                             <label for="inputState">Status</label>
@@ -34,7 +34,7 @@
                               <option value="0">Inactive</option>
                             </select>
                         </div>
-                        <button type="submmit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary">Create</button>
                     </form>
                   </div>
 

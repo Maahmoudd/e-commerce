@@ -21,7 +21,7 @@ trait ImageUploadTrait
 
     public function updateImage($request, $inputName, $path, $oldPath)
     {
-        if($request->hasFile($inputName)){
+        if (isset($request[$inputName])) {
             $this->deleteImage($oldPath);
 
             $image = $request[$inputName];

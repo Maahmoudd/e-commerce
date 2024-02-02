@@ -7,8 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\CreateBrandRequest;
 use App\Http\Services\Backend\CategoryService;
 use App\Models\Brand;
-use App\Traits\ImageUploadTrait;
-use Illuminate\Http\Request;
 
 class BrandsController extends Controller
 {
@@ -32,7 +30,7 @@ class BrandsController extends Controller
 
     public function store(CreateBrandRequest $request)
     {
-        $this->categoryService->create($request->validated(), Brand::class, 'logo');
+        $this->categoryService->create($request->validated(), Brand::class);
         toastr('Created Successfully!');
         return redirect()->route('admin.brand.index');
     }
@@ -44,12 +42,15 @@ class BrandsController extends Controller
 
     public function edit(string $id)
     {
-        //
+        $brand = Brand::findOrFail($id);
+        return view('admin.brand.edit', compact('brand'));
     }
 
-    public function update(Request $request, string $id)
+    public function update(CreateBrandRequest $request, string $id)
     {
-        //
+        $this->categoryService->update($request->validated(), $id, Brand::class, 'logo');
+        toastr('Updated Successfully!');
+        return redirect()->route('admin.brand.index');
     }
 
     public function destroy(string $id)

@@ -19,11 +19,14 @@ class CategoryService
         $object::create($request);
     }
 
-    public function update($request, $id, $object)
+    public function update($request, $id, $object, $photo)
     {
-        $category = $object::findOrFail($id);
+        $object = $object::findOrFail($id);
         $request['slug'] = Str::slug($request['name']);
-        $category->update($request);
+        if (isset($request['logo']) && !empty($request['logo'])) {
+            $request['logo'] = $this->updateImage($request, $photo, 'uploads', $object[$photo]);
+        }
+        $object->update($request);
     }
 
     public function destroy($id, $object, $innerObject, $objectField)

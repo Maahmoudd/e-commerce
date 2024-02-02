@@ -21,12 +21,19 @@ class CreateBrandRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'name' => ['required', 'string', 'max:200'],
             'is_featured' => ['required'],
             'status' => ['required'],
-            'logo' => ['required', 'image', 'max:2000'],
         ];
-    }
+        // Check if it's a creation request
+        if ($this->isMethod('post')) {
+            $rules['logo'] = ['required', 'image', 'max:2000'];
+        } elseif ($this->isMethod('put')) {
+            // If it's an update request, make 'logo' field 'nullable'
+            $rules['logo'] = ['nullable', 'image', 'max:2000'];
+        }
 
+        return $rules;
+    }
 }

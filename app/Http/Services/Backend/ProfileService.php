@@ -10,19 +10,15 @@ class ProfileService
 {
     use ImageUploadTrait;
 
-    public function profileUpdate($request)
+    public function profileUpdate($request, $image, $user)
     {
-        $user = Auth::user();
-
-        if ($request->hasFile('image')){
-            if (File::exists(public_path($user->image))){
-                File::delete(public_path($user->image));
+        if (isset($request[$image]) && !empty($request[$image])) {
+            if (File::exists(public_path($user[$image]))){
+                File::delete(public_path($user[$image]));
             }
-            $request['image'] = $this->uploadImage($request, 'image', 'uploads');
+            $request[$image] = $this->uploadImage($request, $image, 'uploads');
         }
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->save();
+        $user->update($request);
     }
 
 

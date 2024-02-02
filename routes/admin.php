@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\AdminVendorProfileController;
 use App\Http\Controllers\Backend\BrandsController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
@@ -36,3 +37,6 @@ Route::resource('child-category', ChildCategoryController::class);
 /** Brand Routes */
 Route::put('brand/change-status', [BrandsController::class, 'changeStatus'])->name('brand.change-status');
 Route::resource('brand', BrandsController::class);
+
+/** Vendor Profile Routes */
+Route::resource('vendor-profile', AdminVendorProfileController::class);

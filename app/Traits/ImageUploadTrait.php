@@ -33,6 +33,27 @@ trait ImageUploadTrait
             return $finalPath;
         }
     }
+    public function uploadMultiImage($request, $inputName, $path)
+    {
+        $imagePaths = [];
+
+        if (isset($request[$inputName])) {
+
+            $images = $request[$inputName];
+
+            foreach($images as $image){
+
+                $ext = $image->getClientOriginalExtension();
+                $imageName = 'media_'.uniqid().'.'.$ext;
+
+                $image->move(public_path($path), $imageName);
+
+                $imagePaths[] =  $path.'/'.$imageName;
+            }
+
+            return $imagePaths;
+        }
+    }
 
     public function deleteImage(string $path)
     {

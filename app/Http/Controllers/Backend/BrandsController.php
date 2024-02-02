@@ -7,10 +7,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\CreateBrandRequest;
 use App\Http\Services\Backend\CategoryService;
 use App\Models\Brand;
+use App\Traits\ImageUploadTrait;
+use Illuminate\Http\Request;
 
 class BrandsController extends Controller
 {
 
+    use ImageUploadTrait;
     protected $categoryService;
 
     public function __construct(CategoryService $categoryService)
@@ -55,6 +58,15 @@ class BrandsController extends Controller
 
     public function destroy(string $id)
     {
-        //
+        $brand = Brand::findOrFail($id);
+        $this->deleteImage($brand->logo);
+        $brand->delete();
+        return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+    }
+
+    public function changeStatus(Request $request)
+    {
+        $this->categoryService->changeStatus($request, Brand::class);
+        return response(['message' => 'Status Updated!']);
     }
 }

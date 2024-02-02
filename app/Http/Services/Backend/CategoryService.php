@@ -44,9 +44,9 @@ class CategoryService
 
     public function changeStatus($request, $object)
     {
-        $category = $object::findOrFail($request->id);
-        $category->status = $request->status == 'true' ? 1 : 0;
-        $category->save();
+        $object = $object::findOrFail($request->id);
+        $object->status = $request->status == 'true' ? 1 : 0;
+        $object->save();
     }
 
 }

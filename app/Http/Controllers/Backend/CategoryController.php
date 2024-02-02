@@ -30,7 +30,7 @@ class CategoryController extends Controller
 
     public function store(CreateCategoryRequest $request)
     {
-        $this->categoryService->create($request->validated(), Category::class);
+        $this->categoryService->create($request->validated(), Category::class, null);
         toastr('Created Successfully!');
         return redirect()->route('admin.category.index');
     }
@@ -48,7 +48,7 @@ class CategoryController extends Controller
 
     public function update(CreateCategoryRequest $request, string $id)
     {
-        $this->categoryService->update($request->validated(), $id, Category::class);
+        $this->categoryService->update($request->validated(), $id, Category::class, null);
         toastr('Category Updated!');
         return redirect()->route('admin.category.index');
     }

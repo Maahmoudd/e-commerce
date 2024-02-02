@@ -40,7 +40,7 @@ class ChildCategoryController extends Controller
 
     public function store(CreateChildCategoryRequest $request)
     {
-        $this->categoryService->create($request->validated(), ChildCategory::class);
+        $this->categoryService->create($request->validated(), ChildCategory::class, null);
         toastr('Created Successfully!');
         return redirect()->route('admin.child-category.index');
     }
@@ -60,7 +60,7 @@ class ChildCategoryController extends Controller
 
     public function update(CreateChildCategoryRequest $request, string $id)
     {
-        $this->categoryService->update($request->validated(), $id, ChildCategory::class);
+        $this->categoryService->update($request->validated(), $id, ChildCategory::class, null);
         toastr('Updated Successfully!');
         return redirect()->route('admin.child-category.index');
     }

@@ -30,7 +30,8 @@
             ]) }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Manage Products</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="{{ route('admin.brand.index') }}">Brands</a></li>
+                    <li><a class="{{ setActive(['admin.brand.*']) }}" href="{{ route('admin.brand.index') }}">Brands</a></li>
+                    <li><a class="{{ setActive(['admin.brand.*']) }}" href="{{ route('admin.products.index') }}">Products</a></li>
                 </ul>
             </li>
 

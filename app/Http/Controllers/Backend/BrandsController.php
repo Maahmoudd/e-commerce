@@ -33,7 +33,7 @@ class BrandsController extends Controller
 
     public function store(CreateBrandRequest $request)
     {
-        $this->categoryService->create($request->validated(), Brand::class);
+        $this->categoryService->create($request->validated(), Brand::class, 'logo');
         toastr('Created Successfully!');
         return redirect()->route('admin.brand.index');
     }

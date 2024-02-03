@@ -25,6 +25,9 @@
                             <input type="text" class="form-control" name="name" value="{{$variant->name}}">
                         </div>
                         <div class="form-group">
+                            <input type="hidden" class="form-control" name="product_id" value="{{$variant->product_id}}">
+                        </div>
+                        <div class="form-group">
                             <label for="inputState">Status</label>
                             <select id="inputState" class="form-control" name="status">
                               <option {{$variant->status == 1 ? 'selected' : ''}} value="1">Active</option>

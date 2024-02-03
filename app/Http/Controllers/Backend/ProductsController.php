@@ -62,7 +62,8 @@ class ProductsController extends Controller
         $childCategories = ChildCategory::where('sub_category_id', $product->sub_category_id)->get();
         $categories = Category::all();
         $brands = Brand::all();
-        return view('admin.product.edit', compact('product', 'categories', 'brands', 'subCategories', 'childCategories'));
+        return view('admin.product.edit',
+            compact('product', 'categories', 'brands', 'subCategories', 'childCategories'));
     }
 
 

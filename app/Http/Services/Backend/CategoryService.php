@@ -47,6 +47,7 @@ class CategoryService
         $object = $object::findOrFail($request->id);
         $object->status = $request->status == 'true' ? 1 : 0;
         $object->save();
+        return response(['message' => 'Status has been changed!']);
     }
 
 }

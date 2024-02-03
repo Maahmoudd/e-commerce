@@ -8,23 +8,23 @@ use Illuminate\Support\Str;
 class CategoryService
 {
     use ImageUploadTrait;
-    public function create($request, $object, $image)
+    public function create($request, $object, $image, $storagePath)
     {
         $slug = Str::slug($request['name']);
         $request['slug'] = $slug;
 
         if (isset($request[$image]) && !empty($request[$image])) {
-            $request[$image] = $this->uploadImage($request, $image, 'uploads');
+            $request[$image] = $this->uploadImage($request, $image, $storagePath);
         }
         $object::create($request);
     }
 
-    public function update($request, $id, $object, $image)
+    public function update($request, $id, $object, $image, $storagePath)
     {
         $object = $object::findOrFail($id);
         $request['slug'] = Str::slug($request['name']);
         if (isset($request[$image]) && !empty($request['logo'])) {
-            $request[$image] = $this->updateImage($request, $image, 'uploads', $object[$image]);
+            $request[$image] = $this->updateImage($request, $image, $storagePath, $object[$image]);
         }
         $object->update($request);
     }

@@ -33,7 +33,7 @@ class SubCategoryController extends Controller
 
     public function store(CreateSubCategoryRequest $request)
     {
-        $this->categoryService->create($request->validated(), SubCategory::class, null);
+        $this->categoryService->create($request->validated(), SubCategory::class, null, null);
         toastr('Created Successfully!');
         return redirect()->route('admin.sub-category.index');
     }
@@ -52,7 +52,7 @@ class SubCategoryController extends Controller
 
     public function update(CreateSubCategoryRequest $request, string $id)
     {
-        $this->categoryService->update($request->validated(), $id, SubCategory::class, null);
+        $this->categoryService->update($request->validated(), $id, SubCategory::class, null, null);
         toastr('Updated Successfully!');
         return redirect()->route('admin.sub-category.index');
     }

@@ -25,7 +25,7 @@ class ProfileController extends Controller
 
     public function updateProfile(ProfileUpdateRequest $request)
     {
-        $this->profileService->profileUpdate($request->validated(), 'image', Auth::user());
+        $this->profileService->profileUpdate($request->validated(), 'image', Auth::user(), 'uploads/Admins');
 
         toastr()->success('Profile Has Been Updated');
 

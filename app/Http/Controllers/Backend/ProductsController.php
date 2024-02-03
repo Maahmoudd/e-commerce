@@ -44,7 +44,7 @@ class ProductsController extends Controller
             'is_approved' => 1
         ]);
 
-        $this->categoryService->create($mergedData, Product::class, 'thumb_image');
+        $this->categoryService->create($mergedData, Product::class, 'thumb_image', 'uploads/products');
 
         toastr('Created Successfully!');
         return redirect()->route('admin.products.index');
@@ -76,13 +76,14 @@ class ProductsController extends Controller
             'is_approved' => 1
         ]);
 
-        $this->categoryService->update($mergedData,$id, Product::class,'thumb_image');
+        $this->categoryService->update($mergedData,$id, Product::class,'thumb_image', 'uploads/products');
         toastr('Updated Successfully!');
         return redirect()->route('admin.products.index');
     }
     public function destroy(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+
     }
 
     public function getSubCategories(Request $request)

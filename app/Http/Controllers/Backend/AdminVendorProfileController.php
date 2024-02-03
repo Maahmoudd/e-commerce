@@ -32,7 +32,7 @@ class AdminVendorProfileController extends Controller
     public function store(UpdateVendorProfileRequest $request)
     {
         $vendor = Vendor::where('user_id', Auth::user()->id)->first();
-        $this->profileService->profileUpdate($request->validated(), 'banner', $vendor);
+        $this->profileService->profileUpdate($request->validated(), 'banner', $vendor, 'uploads/VendorProfiles');
         toastr('Updated Successfully!');
         return back();
     }

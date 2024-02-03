@@ -11,14 +11,14 @@ class SliderService
     use ImageUploadTrait;
     public function createSlider($request)
     {
-        $request['banner'] = $this->uploadImage($request, 'banner', 'uploads');
+        $request['banner'] = $this->uploadImage($request, 'banner', 'uploads/sliders');
         Slider::create($request);
     }
 
     public function updateSlider($request, $id)
     {
         $slider = Slider::findOrFail($id);
-        $sliderBanner = $this->updateImage($request, 'banner', 'uploads', $slider->banner);
+        $sliderBanner = $this->updateImage($request, 'banner', 'uploads/sliders', $slider->banner);
         $slider->update($request->validated());
         $slider->banner = empty(!$sliderBanner) ? $sliderBanner : $slider->banner;
         $slider->save();

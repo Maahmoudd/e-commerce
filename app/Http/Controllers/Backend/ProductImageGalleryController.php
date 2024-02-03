@@ -27,7 +27,7 @@ class ProductImageGalleryController extends Controller
 
     public function store(CreateProductGalleryRequest $request)
     {
-        $imagePaths = $this->uploadMultiImage($request->validated(), 'image', 'uploads');
+        $imagePaths = $this->uploadMultiImage($request->validated(), 'image', 'uploads/gallery');
         foreach ($imagePaths as $path){
             ProductImageGallery::create(['image' => $path, 'product_id' => $request->product]);
         }

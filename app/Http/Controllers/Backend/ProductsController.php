@@ -86,9 +86,11 @@ class ProductsController extends Controller
     public function destroy(string $id)
     {
         $product = Product::findOrFail($id);
-        foreach (ProductImageGallery::findOrFail($id)->image as $image){
-            $this->deleteImage($image);
+        $gallery = ProductImageGallery::where('product_id', $id)->get();
+        foreach ($gallery as $image){
+            $this->deleteImage($image->image);
         }
+        $this->deleteImage($product->thumb_image);
         $product->delete();
         return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
 

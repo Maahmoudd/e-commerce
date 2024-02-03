@@ -31,7 +31,7 @@ class ProductVariantItemsController extends Controller
     public function create(string $productId, string $variantId)
     {
         $variant = ProductVariant::findOrFail($variantId);
-        $product = ProductVariant::findOrFail($productId);
+        $product = Product::findOrFail($productId);
         return view('admin.product.product-variant-item.create',
             compact('variant', 'product'));
     }

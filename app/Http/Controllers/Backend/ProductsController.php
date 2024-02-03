@@ -10,13 +10,16 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ChildCategory;
 use App\Models\Product;
+use App\Models\ProductImageGallery;
 use App\Models\SubCategory;
+use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller
 {
 
+    use ImageUploadTrait;
     protected $categoryService;
     public function __construct(CategoryService $categoryService)
     {
@@ -83,7 +86,17 @@ class ProductsController extends Controller
     public function destroy(string $id)
     {
         $product = Product::findOrFail($id);
+        foreach (ProductImageGallery::findOrFail($id)->image as $image){
+            $this->deleteImage($image);
+        }
+        $product->delete();
+        return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
 
+    }
+
+    public function changeStatus(Request $request)
+    {
+        return $this->categoryService->changeStatus($request, Product::class);
     }
 
     public function getSubCategories(Request $request)
@@ -94,4 +107,5 @@ class ProductsController extends Controller
     {
         return ChildCategory::where('sub_category_id', $request->id)->get();
     }
+
 }

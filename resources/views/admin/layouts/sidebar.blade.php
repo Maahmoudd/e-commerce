@@ -27,11 +27,23 @@
 
             <li class="dropdown {{ setActive([
                 'admin.brand.*',
+                'admin.products.*',
+                'admin.products-image-gallery.*',
+                'admin.products-variant.*',
+                'admin.products-variant-item.*',
+                'admin.seller-products.*',
+                'admin.seller-pending-products.*'
             ]) }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Manage Products</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="{{ setActive(['admin.brand.*']) }}" href="{{ route('admin.brand.index') }}">Brands</a></li>
-                    <li><a class="{{ setActive(['admin.brand.*']) }}" href="{{ route('admin.products.index') }}">Products</a></li>
+                    <li><a class="{{ setActive(['admin.products.*',
+                                                'admin.products-image-gallery.*',
+                                                'admin.products-variant.*',
+                                                'admin.products-variant-item.*'
+                                                ]) }}" href="{{ route('admin.products.index') }}">Products</a></li>
+                    <li><a class="{{ setActive(['admin.seller-products.*']) }}" href="{{ route('admin.seller-products.index') }}">Seller Products</a></li>
+                    <li><a class="{{ setActive(['admin.seller-pending-products.*']) }}" href="{{ route('admin.seller-pending-products.index') }}">Pending Products</a></li>
                 </ul>
             </li>
 

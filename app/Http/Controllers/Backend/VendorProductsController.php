@@ -12,11 +12,13 @@ use App\Models\ChildCategory;
 use App\Models\Product;
 use App\Models\ProductImageGallery;
 use App\Models\SubCategory;
+use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class VendorProductsController extends Controller
 {
+    use ImageUploadTrait;
     protected $categoryService;
     public function __construct(CategoryService $categoryService)
     {

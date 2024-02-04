@@ -3,12 +3,20 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Backend\UpdateVendorProfileRequest;
+use App\Http\Services\Backend\ProfileService;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class VendorShopProfilesController extends Controller
 {
+
+    protected $profileService;
+    public function __construct(ProfileService $profileService)
+    {
+        $this->profileService = $profileService;
+    }
 
     public function index()
     {
@@ -21,9 +29,12 @@ class VendorShopProfilesController extends Controller
         //
     }
 
-    public function store(Request $request)
+    public function store(UpdateVendorProfileRequest $request)
     {
-        //
+        $vendor = Vendor::where('user_id', Auth::user()->id)->first();
+        $this->profileService->profileUpdate($request->validated(), 'banner', $vendor, 'uploads/VendorShops');
+        toastr('Updated Successfully!');
+        return back();
     }
 
     public function show(string $id)

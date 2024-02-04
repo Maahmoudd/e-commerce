@@ -20,6 +20,7 @@ class Vendor extends Model
         'fb_link',
         'tw_link',
         'insta_link',
+        'status'
     ];
 
     public function user(): BelongsTo

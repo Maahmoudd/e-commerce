@@ -68,14 +68,7 @@ class ProductsController extends Controller
 
     public function update(CreateProductRequest $request, string $id)
     {
-        $validatedData = $request->validated();
-
-        $mergedData = array_merge($validatedData, [
-            'vendor_id' => Auth::user()->vendor->id,
-            'is_approved' => 1
-        ]);
-
-        $this->categoryService->update($mergedData,$id, Product::class,'thumb_image', 'uploads/products');
+        $this->categoryService->update($request->validated(), $id, Product::class,'thumb_image', 'uploads/products');
         toastr('Updated Successfully!');
         return redirect()->route('admin.products.index');
     }

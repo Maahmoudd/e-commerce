@@ -16,4 +16,10 @@ class Product extends Model
     {
         return $this->belongsTo(Vendor::class);
     }
+
+    public function scopeApprovedAndActive($query)
+    {
+        return $query->where('is_approved', 1)
+            ->where('status', 1);
+    }
 }

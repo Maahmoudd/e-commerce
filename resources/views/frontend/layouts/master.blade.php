@@ -150,7 +150,7 @@
     })
 </script>
 {{--@include('frontend.layouts.scripts')--}}
-{{--@stack('scripts')--}}
+@stack('scripts')
 </body>
 
 </html>

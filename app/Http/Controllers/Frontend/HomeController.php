@@ -3,24 +3,17 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Services\Frontend\HomeService;
+use App\Models\FlashSale;
+use App\Models\Slider;
 
 
 class HomeController extends Controller
 {
-
-    protected $homeService;
-
-    public function __construct(HomeService $homeService)
-    {
-        $this->homeService = $homeService;
-    }
-
-
     public function index()
     {
-        $sliders = $this->homeService->index();
+        $sliders = Slider::where('status', 1)->orderBy('serial', 'asc')->get();
+        $flashSaleDate = FlashSale::first();
         return view('frontend.home.home',
-            compact('sliders'));
+            compact('sliders', 'flashSaleDate'));
     }
 }

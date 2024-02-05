@@ -22,7 +22,7 @@ class CreateFlashSaleItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'product_id' => ['required'],
+            'product_id' => ['required', 'unique:flash_sale_items,product_id'],
             'show_at_home' => ['required'],
             'status' => ['required'],
         ];

@@ -6,6 +6,7 @@ use App\DataTables\FlashSaleItemDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\CreateFlashSaleItemRequest;
 use App\Http\Requests\Backend\UpdateFlashSaleRequest;
+use App\Http\Services\Backend\CategoryService;
 use App\Models\FlashSale;
 use App\Models\FlashSaleItem;
 use App\Models\Product;
@@ -35,5 +36,30 @@ class FlashSaleController extends Controller
         FlashSaleItem::create($request->validated());
         toastr('Product Added Successfully!');
         return back();
+    }
+
+    public function changeShowAtHomeStatus(Request $request)
+    {
+        $flashSaleItem = FlashSaleItem::findOrFail($request->id);
+        $flashSaleItem->show_at_home = $request->status == 'true' ? 1 : 0;
+        $flashSaleItem->save();
+
+        return response(['message' => 'Status has been updated!']);
+    }
+
+    public function changeStatus(Request $request)
+    {
+        $flashSaleItem = FlashSaleItem::findOrFail($request->id);
+        $flashSaleItem->status = $request->status == 'true' ? 1 : 0;
+        $flashSaleItem->save();
+
+        return response(['message' => 'Status has been updated!']);
+    }
+
+    public function destroy(string $id)
+    {
+        $flashSaleItem = FlashSaleItem::findOrFail($id);
+        $flashSaleItem->delete();
+        return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
     }
 }

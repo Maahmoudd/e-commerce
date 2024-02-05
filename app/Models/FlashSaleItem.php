@@ -20,4 +20,9 @@ class FlashSaleItem extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function scopeHomeActive($query)
+    {
+        return $query->where('show_at_home', 1)->where('status', 1);
+    }
 }

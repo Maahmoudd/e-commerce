@@ -53,7 +53,7 @@ class ProductVariantDataTable extends DataTable
      */
     public function query(ProductVariant $model): QueryBuilder
     {
-        return $model->where('product_id', request()->product)->newQuery();
+        return $model->where('product_id', request()->product_id)->newQuery();
     }
 
     public function html(): HtmlBuilder

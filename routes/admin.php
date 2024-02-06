@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\AdminVendorProfileController;
 use App\Http\Controllers\Backend\BrandsController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
+use App\Http\Controllers\Backend\CouponsController;
 use App\Http\Controllers\Backend\FlashSaleController;
 use App\Http\Controllers\Backend\ProductImageGalleryController;
 use App\Http\Controllers\Backend\ProductsController;
@@ -83,9 +84,12 @@ Route::put('flash-sale/show-at-home/status-change', [FlashSaleController::class,
 Route::put('flash-sale-status', [FlashSaleController::class, 'changeStatus'])->name('flash-sale-status');
 Route::delete('flash-sale/{id}', [FlashSaleController::class, 'destroy'])->name('flash-sale.destroy');
 
-/** settings routes */
+/** Coupon routes */
+Route::put('coupons/change-status', [CouponsController::class, 'changeStatus'])->name('coupons.change-status');
+Route::resource('coupons', CouponsController::class);
+
+/** Settings routes */
 Route::get('settings', [SettingsController::class, 'index'])->name('settings.index');
 Route::put('generale-setting-update', [SettingsController::class, 'generalSettingUpdate'])->name('generale-setting-update');
-Route::put('email-setting-update', [SettingsController::class, 'emailConfigSettingUpdate'])->name('email-setting-update');
-Route::put('logo-setting-update', [SettingsController::class, 'logoSettingUpdate'])->name('logo-setting-update');
-Route::put('pusher-setting-update', [SettingsController::class, 'pusherSettingUpdate'])->name('pusher-setting-update');
+
+

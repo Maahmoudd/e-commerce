@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Frontend\FlashSaleController;
 use App\Http\Controllers\Frontend\FrontendProductsController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\UserAddressesController;
 use App\Http\Controllers\Frontend\UserDashboardController;
 use App\Http\Controllers\Frontend\UserProfileController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,8 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
    Route::get('profile', [UserProfileController::class, 'index'])->name('profile');
    Route::put('profile',[\App\Http\Controllers\Backend\ProfileController::class, 'updateProfile'])->name('profile.update');
    Route::put('password',[\App\Http\Controllers\Backend\ProfileController::class, 'updatePassword'])->name('profile.update.password');
+
+   Route::resource('address', UserAddressesController::class);
 });
 
 require __DIR__.'/auth.php';

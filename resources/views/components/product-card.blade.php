@@ -37,22 +37,22 @@
             </p>
             <a class="wsus__pro_name" href="{{route('product-detail', $product->slug)}}">{{limitText($product->name, 52)}}</a>
             @if(checkDiscount($product))
-                <p class="wsus__price">{{$product->offer_price}} <del>{{$product->price}}</del></p>
+                <p class="wsus__price">{{$settings->currency_icon}}{{$product->offer_price}} <del>{{$settings->currency_icon}}{{$product->price}}</del></p>
             @else
-                <p class="wsus__price">{{$product->price}}</p>
+                <p class="wsus__price">{{$settings->currency_icon}}{{$product->price}}</p>
             @endif
             <form class="shopping-cart-form">
                 <input type="hidden" name="product_id" value="{{$product->id}}">
                 @foreach ($product->variants as $variant)
-                @if ($variant->status != 0)
-                    <select class="d-none" name="variants_items[]">
-                        @foreach ($variant->productVariantItems as $variantItem)
-                            @if ($variantItem->status != 0)
-                                <option value="{{$variantItem->id}}" {{$variantItem->is_default == 1 ? 'selected' : ''}}>{{$variantItem->name}} (${{$variantItem->price}})</option>
-                            @endif
-                        @endforeach
-                    </select>
-                @endif
+                    @if ($variant->status != 0)
+                        <select class="d-none" name="variants_items[]">
+                            @foreach ($variant->productVariantItems as $variantItem)
+                                @if ($variantItem->status != 0)
+                                    <option value="{{$variantItem->id}}" {{$variantItem->is_default == 1 ? 'selected' : ''}}>{{$variantItem->name}} (${{$variantItem->price}})</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    @endif
                 @endforeach
                 <input class="" name="qty" type="hidden" min="1" max="100" value="1" />
                 <button class="add_cart" type="submit">add to cart</button>

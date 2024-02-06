@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\ProductVariantController;
 use App\Http\Controllers\Backend\ProductVariantItemsController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\SellerProductsController;
+use App\Http\Controllers\Backend\SettingsController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use Illuminate\Support\Facades\Route;
@@ -81,3 +82,10 @@ Route::post('flash-sale/add-product', [FlashSaleController::class, 'create'])->n
 Route::put('flash-sale/show-at-home/status-change', [FlashSaleController::class, 'changeShowAtHomeStatus'])->name('flash-sale.show-at-home.change-status');
 Route::put('flash-sale-status', [FlashSaleController::class, 'changeStatus'])->name('flash-sale-status');
 Route::delete('flash-sale/{id}', [FlashSaleController::class, 'destroy'])->name('flash-sale.destroy');
+
+/** settings routes */
+Route::get('settings', [SettingsController::class, 'index'])->name('settings.index');
+Route::put('generale-setting-update', [SettingsController::class, 'generalSettingUpdate'])->name('generale-setting-update');
+Route::put('email-setting-update', [SettingsController::class, 'emailConfigSettingUpdate'])->name('email-setting-update');
+Route::put('logo-setting-update', [SettingsController::class, 'logoSettingUpdate'])->name('logo-setting-update');
+Route::put('pusher-setting-update', [SettingsController::class, 'pusherSettingUpdate'])->name('pusher-setting-update');

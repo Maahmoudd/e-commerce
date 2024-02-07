@@ -1,8 +1,8 @@
 @extends('frontend.layouts.master')
 
-{{--@section('title')--}}
-{{--{{$settings->site_name}} || Forgot Password--}}
-{{--@endsection--}}
+@section('title')
+{{$settings->site_name}} || Forgot Password
+@endsection
 
 @section('content')
 

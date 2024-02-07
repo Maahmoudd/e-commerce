@@ -1,4 +1,7 @@
 @extends('frontend.layouts.master')
+@section('title')
+    {{ $settings->site_name }} || e-Commerce
+@endsection
 
 @section('content')
     <!--==========================

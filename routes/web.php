@@ -4,9 +4,11 @@ use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Frontend\CartItemsController;
 use App\Http\Controllers\Frontend\CartsController;
+use App\Http\Controllers\Frontend\CheckOutController;
 use App\Http\Controllers\Frontend\FlashSaleController;
 use App\Http\Controllers\Frontend\FrontendProductsController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\UserAddressesController;
 use App\Http\Controllers\Frontend\UserDashboardController;
 use App\Http\Controllers\Frontend\UserProfileController;
@@ -53,6 +55,14 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
    Route::put('password',[\App\Http\Controllers\Backend\ProfileController::class, 'updatePassword'])->name('profile.update.password');
 
    Route::resource('address', UserAddressesController::class);
+
+    /** Checkout routes */
+    Route::get('checkout', [CheckOutController::class, 'index'])->name('checkout');
+    Route::post('checkout/address-create', [CheckOutController::class, 'createAddress'])->name('checkout.address.create');
+    Route::post('checkout/form-submit', [CheckOutController::class, 'checkOutFormSubmit'])->name('checkout.form-submit');
+
+    /** Payment Routes */
+    Route::get('payment', [PaymentController::class, 'index'])->name('payment');
 });
 
 require __DIR__.'/auth.php';

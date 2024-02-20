@@ -1,15 +1,13 @@
 <?php
 
+use App\Models\GeneralSetting;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Str;
 
+/** Set Sidebar item active */
 
-/** Set Sidebar item as active */
-
-function setActive(array $route)
-{
-    if (is_array($route)){
-        foreach ($route as $r){
+function setActive(array $route){
+    if(is_array($route)){
+        foreach($route as $r){
             if(request()->routeIs($r)){
                 return 'active';
             }
@@ -38,6 +36,7 @@ function calculateDiscountPercent($originalPrice, $discountPrice) {
     return round($discountPercent);
 }
 
+
 /** Check the product type */
 
 function productType($type)
@@ -61,11 +60,6 @@ function productType($type)
             return '';
             break;
     }
-}
-
-function limitText($text, $limit = 20)
-{
-    return Str::limit($text, $limit);
 }
 
 /** get total cart amount */
@@ -112,9 +106,31 @@ function getCartDiscount(){
     }
 }
 
+/** get selected shipping fee from session */
+function getShppingFee(){
+    if(Session::has('shipping_method')){
+        return Session::get('shipping_method')['cost'];
+    }else {
+        return 0;
+    }
+}
 
+/** get payable amount */
+function getFinalPayableAmount(){
+    return  getMainCartTotal() + getShppingFee();
+}
 
+/** lemit text */
 
+function limitText($text, $limit = 20)
+{
+    return \Str::limit($text, $limit);
+}
 
+function getCurrencyIcon()
+{
+    $icon = GeneralSetting::first();
 
+    return $icon->currency_icon;
+}
 

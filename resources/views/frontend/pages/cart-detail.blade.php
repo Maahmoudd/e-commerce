@@ -292,22 +292,22 @@
             })
         }
 
-        // applay coupon on cart
+        // apply coupon on cart
 
         $('#coupon_form').on('submit', function(e){
             e.preventDefault();
             let formData = $(this).serialize();
             $.ajax({
                 method: 'GET',
-                url: "",
+                url: "{{ route('apply-coupon') }}",
                 data: formData,
                 success: function(data) {
-                   if(data.status === 'error'){
-                    toastr.error(data.message)
-                   }else if (data.status === 'success'){
-                    calculateCouponDescount()
-                    toastr.success(data.message)
-                   }
+                    if(data.status === 'error'){
+                        toastr.error(data.message)
+                    }else if (data.status === 'success'){
+                        calculateCouponDescount()
+                        toastr.success(data.message)
+                    }
                 },
                 error: function(data) {
                     console.log(data);
@@ -320,7 +320,7 @@
         function calculateCouponDescount(){
             $.ajax({
                 method: 'GET',
-                url: "",
+                url: "{{ route('coupon-calculation') }}",
                 success: function(data) {
                     if(data.status === 'success'){
                         $('#discount').text('{{$settings->currency_icon}}'+data.discount);

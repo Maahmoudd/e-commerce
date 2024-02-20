@@ -38,6 +38,9 @@ Route::get('cart/sidebar-product-total', [CartsController::class, 'cartTotal'])-
 Route::get('cart-count', [CartsController::class, 'getCartCount'])->name('cart-count');
 Route::post('cart/remove-sidebar-product', [CartsController::class, 'removeSidebarProduct'])->name('cart.remove-sidebar-product');
 
+Route::get('apply-coupon', [CartsController::class, 'applyCoupon'])->name('apply-coupon');
+Route::get('coupon-calculation', [CartsController::class, 'couponCalculation'])->name('coupon-calculation');
+
 /** Cart Items routes */
 Route::get('cart/remove-product/{rowId}', [CartItemsController::class, 'destroy'])->name('cart.remove-product');
 Route::get('cart-products', [CartItemsController::class, 'index'])->name('cart-products');

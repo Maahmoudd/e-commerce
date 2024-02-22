@@ -7,6 +7,8 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\CouponsController;
 use App\Http\Controllers\Backend\FlashSaleController;
+use App\Http\Controllers\Backend\PaymentSettingController;
+use App\Http\Controllers\Backend\PaypalSettingController;
 use App\Http\Controllers\Backend\ProductImageGalleryController;
 use App\Http\Controllers\Backend\ProductsController;
 use App\Http\Controllers\Backend\ProductVariantController;
@@ -98,3 +100,6 @@ Route::get('settings', [SettingsController::class, 'index'])->name('settings.ind
 Route::put('generale-setting-update', [SettingsController::class, 'generalSettingUpdate'])->name('generale-setting-update');
 
 
+/** Payment settings routes */
+Route::get('payment-settings', [PaymentSettingController::class, 'index'])->name('payment-settings.index');
+Route::resource('paypal-setting', PaypalSettingController::class);

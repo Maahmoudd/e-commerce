@@ -15,4 +15,10 @@ class PaymentController extends Controller
         }
         return view('frontend.pages.payment');
     }
+
+    public function paymentSuccess()
+    {
+        return view('frontend.pages.payment-success');
+    }
+
 }

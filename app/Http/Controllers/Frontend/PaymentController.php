@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Services\Frontend\OrderService;
 use App\Models\PaypalSetting;
-use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
@@ -34,15 +34,6 @@ class PaymentController extends Controller
     {
         $this->orderService->store($paymentMethod, $paymentStatus, $transactionId, $paidAmount, $paidCurrencyName);
     }
-
-    public function clearSession()
-    {
-        Cart::destroy();
-        Session::forget('address');
-        Session::forget('shipping_method');
-        Session::forget('coupon');
-    }
-
 
     public function paypalConfig()
     {
@@ -130,7 +121,7 @@ class PaymentController extends Controller
             $this->storeOrder('paypal', 1, $response['id'], $paidAmount, $paypalSetting->currency_name);
 
             // clear session
-            $this->clearSession();
+            $this->orderService->clearSession();
 
             return redirect()->route('user.payment.success');
         }
@@ -143,6 +134,4 @@ class PaymentController extends Controller
         toastr('Something went wrong try again later!', 'error', 'Error');
         return redirect()->route('user.payment');
     }
-
-
 }

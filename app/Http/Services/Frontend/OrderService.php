@@ -64,4 +64,12 @@ class OrderService
         $transaction->save();
 
     }
+
+    public function clearSession()
+    {
+        Cart::destroy();
+        Session::forget('address');
+        Session::forget('shipping_method');
+        Session::forget('coupon');
+    }
 }

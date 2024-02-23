@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\AdminVendorProfileController;
 use App\Http\Controllers\Backend\BrandsController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
+use App\Http\Controllers\Backend\CodSettingController;
 use App\Http\Controllers\Backend\CouponsController;
 use App\Http\Controllers\Backend\FlashSaleController;
 use App\Http\Controllers\Backend\PaymentSettingController;
@@ -14,10 +15,12 @@ use App\Http\Controllers\Backend\ProductsController;
 use App\Http\Controllers\Backend\ProductVariantController;
 use App\Http\Controllers\Backend\ProductVariantItemsController;
 use App\Http\Controllers\Backend\ProfileController;
+use App\Http\Controllers\Backend\RazorpaySettingController;
 use App\Http\Controllers\Backend\SellerProductsController;
 use App\Http\Controllers\Backend\SettingsController;
 use App\Http\Controllers\Backend\ShippingRulesController;
 use App\Http\Controllers\Backend\SliderController;
+use App\Http\Controllers\Backend\StripeSettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -103,3 +106,6 @@ Route::put('generale-setting-update', [SettingsController::class, 'generalSettin
 /** Payment settings routes */
 Route::get('payment-settings', [PaymentSettingController::class, 'index'])->name('payment-settings.index');
 Route::resource('paypal-setting', PaypalSettingController::class);
+Route::put('stripe-setting/{id}', [StripeSettingController::class, 'update'])->name('stripe-setting.update');
+Route::put('razorpay-setting/{id}', [RazorpaySettingController::class, 'update'])->name('razorpay-setting.update');
+Route::put('cod-setting/{id}', [CodSettingController::class, 'update'])->name('cod-setting.update');

@@ -8,6 +8,7 @@ use App\Http\Controllers\Frontend\CheckOutController;
 use App\Http\Controllers\Frontend\FlashSaleController;
 use App\Http\Controllers\Frontend\FrontendProductsController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\OtherPaymentController;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\UserAddressesController;
 use App\Http\Controllers\Frontend\UserDashboardController;
@@ -69,6 +70,15 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     Route::get('paypal/payment', [PaymentController::class, 'payWithPaypal'])->name('paypal.payment');
     Route::get('paypal/success', [PaymentController::class, 'paypalSuccess'])->name('paypal.success');
     Route::get('paypal/cancel', [PaymentController::class, 'paypalCancel'])->name('paypal.cancel');
+
+    /** Stripe routes */
+    Route::post('stripe/payment', [OtherPaymentController::class, 'payWithStripe'])->name('stripe.payment');
+
+    /** Razorpay routes */
+    Route::post('razorpay/payment', [OtherPaymentController::class, 'payWithRazorPay'])->name('razorpay.payment');
+
+    /** COD routes */
+    Route::get('cod/payment', [OtherPaymentController::class, 'payWithCod'])->name('cod.payment');
 });
 
 require __DIR__.'/auth.php';

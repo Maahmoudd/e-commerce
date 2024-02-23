@@ -4,12 +4,19 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\PaypalSetting;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 class PaymentController extends Controller
 {
+    protected $orderService;
+    public function __construct(OrderService $orderService)
+    {
+        $this->orderService = $orderService;
+    }
+
     public function index()
     {
         if(!Session::has('address')){
@@ -22,6 +29,20 @@ class PaymentController extends Controller
     {
         return view('frontend.pages.payment-success');
     }
+
+    public function storeOrder($paymentMethod, $paymentStatus, $transactionId, $paidAmount, $paidCurrencyName)
+    {
+        $this->orderService->store($paymentMethod, $paymentStatus, $transactionId, $paidAmount, $paidCurrencyName);
+    }
+
+    public function clearSession()
+    {
+        Cart::destroy();
+        Session::forget('address');
+        Session::forget('shipping_method');
+        Session::forget('coupon');
+    }
+
 
     public function paypalConfig()
     {
